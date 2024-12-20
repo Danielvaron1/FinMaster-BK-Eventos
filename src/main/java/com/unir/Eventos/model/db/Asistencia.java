@@ -1,8 +1,9 @@
 package com.unir.Eventos.model.db;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Table(name = "asistencias")
@@ -18,12 +19,22 @@ public class Asistencia {
     private Long id;
 
     @Column(name = "usuario_id", nullable = false)
-    @NotNull
     private Long usuarioId;
 
     @ManyToOne
     @JoinColumn(name = "evento_id")
+    @JsonIgnore
     private Evento evento;
+
+    @JsonProperty("evento_id")
+    public Long getEventoId() {
+        return evento != null ? evento.getId() : null;
+    }
+
+    public Asistencia(Long usuarioId, Evento evento) {
+        this.usuarioId = usuarioId;
+        this.evento = evento;
+    }
 
 
 }

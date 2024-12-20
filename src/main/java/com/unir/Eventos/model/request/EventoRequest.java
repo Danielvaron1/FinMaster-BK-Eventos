@@ -1,14 +1,11 @@
 package com.unir.Eventos.model.request;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.antlr.v4.runtime.misc.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -16,10 +13,31 @@ import org.antlr.v4.runtime.misc.NotNull;
 @NoArgsConstructor
 public class EventoRequest {
 
+    @NotEmpty
+    @NotNull
     private Long usuarioId;
+
+    @NotEmpty
+    @NotNull
     private String titulo;
+
+    @NotEmpty
+    @NotNull
     private Long precio;
+
+    @NotEmpty
+    @NotNull
     private String descripcion;
+
+    @NotEmpty
+    @NotNull
     private String fecha;
+
+    @NotEmpty
+    @NotNull
     private String ubicacion;
+
+    @NotEmpty
+    @NotNull
+    private String ciudad;
 }
