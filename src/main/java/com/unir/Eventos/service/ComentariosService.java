@@ -6,6 +6,7 @@ import com.unir.Eventos.model.db.Evento;
 import com.unir.Eventos.model.request.ComentarioRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,21 +19,23 @@ public class ComentariosService {
     private ComentariosJpaRepository comentariosRepository;
 
     @Autowired
+    @Lazy
     private EventosService eventosService;
 
-    public List<Comentario> getComentarios(String eventoId) {
+    public List<Comentario> getComentarios(String eventoId) throws Exception {
         Evento evento = eventosService.getEvento(eventoId);
-        return comentariosRepository.findAllByEvento(evento);
+        return comentariosRepository.findAllByEventoOrderByFechaAsc(evento);
     }
 
-    public Comentario getComentario(String eventoId, String comentarioId) {
+    public Comentario getComentario(String eventoId, String comentarioId) throws Exception {
         Evento evento = eventosService.getEvento(eventoId);
         return comentariosRepository.findByIdAndEvento(Long.valueOf(comentarioId), evento);
     }
 
-    public Comentario createComentario(String eventoId, ComentarioRequest comentario) {
+    public Comentario createComentario(String eventoId, ComentarioRequest comentario) throws Exception {
+
         Evento evento = eventosService.getEvento(eventoId);
-        Comentario comentarioDb = new Comentario(evento, comentario.getUsuarioId(), comentario.getComentario());
+        Comentario comentarioDb = new Comentario(evento, comentario.getUsuarioId(), comentario.getComentario(), comentario.getUsuarioNombre());
         return comentariosRepository.save(comentarioDb);
     }
 
@@ -57,4 +60,7 @@ public class ComentariosService {
     }
 
 
+    public void deleteComentarios(List<Comentario> comentarios) {
+        comentariosRepository.deleteAll(comentarios);
+    }
 }

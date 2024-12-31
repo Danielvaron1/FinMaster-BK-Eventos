@@ -23,7 +23,7 @@ public class EventoRequest {
 
     @NotEmpty
     @NotNull
-    private Long precio;
+    private String precio;
 
     @NotEmpty
     @NotNull

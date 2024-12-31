@@ -21,4 +21,8 @@ public class ComentarioRequest {
     @NotNull
     private String comentario;
 
+    @NotEmpty
+    @NotNull
+    private String usuarioNombre;
+
 }

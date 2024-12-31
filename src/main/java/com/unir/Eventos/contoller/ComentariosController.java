@@ -22,12 +22,21 @@ public class ComentariosController {
 
     @GetMapping("/{eventoId}/Comentarios")
     public ResponseEntity<List<Comentario>> getComentarios(@PathVariable String eventoId) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getComentarios(eventoId));
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(service.getComentarios(eventoId));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
     }
 
     @PostMapping("/{eventoId}/Comentarios")
     public ResponseEntity<Comentario> createComentario(@PathVariable String eventoId,@RequestBody ComentarioRequest request) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.createComentario(eventoId,request));
+        try{
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.createComentario(eventoId,request));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PutMapping("/{eventoId}/Comentarios/{comentarioId}")

@@ -26,7 +26,11 @@ public class EventosController {
 
     @GetMapping("/{eventoId}")
     public ResponseEntity<Evento> getEvento(@PathVariable String eventoId) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getEvento(eventoId));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(service.getEvento(eventoId));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @PostMapping
@@ -40,12 +44,21 @@ public class EventosController {
 
     @PutMapping("/{eventoId}")
     public ResponseEntity<Evento> updateEvento(@PathVariable String eventoId, @RequestBody EventoRequest body) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(service.updateEvento(eventoId,body));
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(service.updateEvento(eventoId,body));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @DeleteMapping("/{eventoId}")
     public ResponseEntity<Evento> deleteEvento(@PathVariable String eventoId) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(service.deleteEvento(eventoId));
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(service.deleteEvento(eventoId));
+        } catch (Exception e) {
+            log.error("Error deleting event"+e);
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }

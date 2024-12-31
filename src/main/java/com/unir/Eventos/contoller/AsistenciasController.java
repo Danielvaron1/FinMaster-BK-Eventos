@@ -20,12 +20,21 @@ public class AsistenciasController {
 
     @GetMapping("/{eventoId}/Asistencias")
     public ResponseEntity<List<Asistencia>> getAsistencias(@PathVariable String eventoId) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getAsistencias(eventoId));
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(service.getAsistencias(eventoId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
     }
 
     @PostMapping("/{eventoId}/Asistencias")
     public ResponseEntity<Asistencia> createAsistencia(@PathVariable String eventoId,@RequestParam String usuarioId) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.createAsistencia(eventoId,usuarioId));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.createAsistencia(eventoId,usuarioId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @DeleteMapping("/{eventoId}/Asistencias")

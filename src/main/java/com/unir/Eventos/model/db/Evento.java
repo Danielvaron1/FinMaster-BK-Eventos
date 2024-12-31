@@ -1,10 +1,6 @@
 package com.unir.Eventos.model.db;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Set;
 
 @Entity
 @Table(name = "eventos")
@@ -26,7 +22,7 @@ public class Evento {
     private String titulo;
 
     @Column(name = "precio", nullable = false)
-    private Long precio;
+    private String precio;
 
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
@@ -39,14 +35,4 @@ public class Evento {
 
     @Column(name = "ciudad", nullable = false)
     private String ciudad;
-
-
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Comentario> comentarios;
-
-
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Asistencia> asistencias;
 }

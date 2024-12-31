@@ -29,6 +29,9 @@ public class Comentario {
     @Column(name = "usuario_id", nullable = false)
     private Long usuarioId;
 
+    @Column(name = "usuario_nombre", nullable = false)
+    private String usuarioNombre;
+
     @Column(name = "comentario",length = 1000, nullable = false)
     private String comentario;
 
@@ -40,10 +43,11 @@ public class Comentario {
         return evento != null ? evento.getId() : null;
     }
 
-    public Comentario(Evento evento, Long usuarioId, String comentario) {
+    public Comentario(Evento evento, Long usuarioId, String comentario, String usuarioNombre) {
         this.evento = evento;
         this.usuarioId = usuarioId;
         this.comentario = comentario;
+        this.usuarioNombre = usuarioNombre;
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.fecha = now.format(formatter);
