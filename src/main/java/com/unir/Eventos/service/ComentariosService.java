@@ -24,7 +24,7 @@ public class ComentariosService {
 
     public List<Comentario> getComentarios(String eventoId) throws Exception {
         Evento evento = eventosService.getEvento(eventoId);
-        return comentariosRepository.findAllByEventoOrderByFechaAsc(evento);
+        return comentariosRepository.findAllByEventoOrderByFechaDesc(evento);
     }
 
     public Comentario getComentario(String eventoId, String comentarioId) throws Exception {

@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -36,10 +37,22 @@ public class EventosService {
     }
 
     public List<Evento> getEventos(String usuarioId,String ciudad) {
+        LocalDateTime hoy = LocalDateTime.now();
         if(StringUtils.hasLength(usuarioId)){
-            return eventosRepository.findByUsuarioId(Long.valueOf(usuarioId));
+            return eventosRepository.findByUsuarioIdAndFechaAfterOrderByFechaAsc(Long.valueOf(usuarioId),hoy);
         } else if (StringUtils.hasLength(ciudad)) {
-            return eventosRepository.findByCiudad(ciudad);
+            return eventosRepository.findByCiudadAndFechaAfterOrderByFechaAsc(ciudad,hoy);
+        } else{
+            return eventosRepository.findAll();
+        }
+    }
+
+    public List<Evento> getEventosFecha(String usuarioId, String ciudad) {
+        LocalDateTime hoy = LocalDateTime.now();
+        if(StringUtils.hasLength(usuarioId)){
+            return eventosRepository.findByUsuarioIdAndFechaBeforeOrderByFechaAsc(Long.valueOf(usuarioId),hoy);
+        } else if (StringUtils.hasLength(ciudad)) {
+            return eventosRepository.findByCiudadAndFechaBeforeOrderByFechaAsc(ciudad, hoy);
         } else{
             return eventosRepository.findAll();
         }

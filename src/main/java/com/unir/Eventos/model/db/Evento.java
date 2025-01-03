@@ -1,6 +1,9 @@
 package com.unir.Eventos.model.db;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "eventos")
@@ -28,7 +31,8 @@ public class Evento {
     private String descripcion;
 
     @Column(name = "fecha", nullable = false)
-    private String fecha;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime fecha;
 
     @Column(name = "ubicacion", nullable = false)
     private String ubicacion;

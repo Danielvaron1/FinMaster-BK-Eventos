@@ -24,6 +24,11 @@ public class EventosController {
         return ResponseEntity.status(HttpStatus.OK).body(service.getEventos(usuarioId,ciudad));
     }
 
+    @GetMapping("/Date")
+    public ResponseEntity<List<Evento>> getEventosFecha(@RequestParam(required= false) String usuarioId, @RequestParam(required= false) String ciudad) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getEventosFecha(usuarioId,ciudad));
+    }
+
     @GetMapping("/{eventoId}")
     public ResponseEntity<Evento> getEvento(@PathVariable String eventoId) {
         try {
@@ -56,7 +61,6 @@ public class EventosController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(service.deleteEvento(eventoId));
         } catch (Exception e) {
-            log.error("Error deleting event"+e);
             return ResponseEntity.badRequest().build();
         }
     }

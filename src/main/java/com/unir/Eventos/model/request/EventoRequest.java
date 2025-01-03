@@ -7,6 +7,8 @@ import lombok.Setter;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -31,7 +33,7 @@ public class EventoRequest {
 
     @NotEmpty
     @NotNull
-    private String fecha;
+    private LocalDateTime fecha;
 
     @NotEmpty
     @NotNull

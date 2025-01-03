@@ -1,12 +1,12 @@
 package com.unir.Eventos.model.db;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "comentarios")
@@ -36,7 +36,8 @@ public class Comentario {
     private String comentario;
 
     @Column(name = "fecha", nullable = false)
-    private String fecha;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime fecha;
 
     @JsonProperty("evento_id")
     public Long getEventoId() {
@@ -48,8 +49,6 @@ public class Comentario {
         this.usuarioId = usuarioId;
         this.comentario = comentario;
         this.usuarioNombre = usuarioNombre;
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        this.fecha = now.format(formatter);
+        this.fecha = LocalDateTime.now();
     }
 }

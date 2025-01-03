@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ComentariosJpaRepository extends JpaRepository<Comentario, Long>, JpaSpecificationExecutor<Comentario> {
 
-    List<Comentario> findAllByEventoOrderByFechaAsc(Evento evento);
+    List<Comentario> findAllByEventoOrderByFechaDesc(Evento evento);
 
     Comentario findByIdAndEvento(Long id, Evento evento);
 }
