@@ -3,7 +3,7 @@ spring:
   application:
     name: eventos
   datasource:
-    url: jdbc:mysql://mysql-parchando-eventos.ch9cxccnfz7t.us-east-1.rds.amazonaws.com:3306/parchando?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://parchando-eventos.cxwy6i4quba8.us-east-1.rds.amazonaws.com:3306/parchando?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
     username: admin
     password: AdminEventos
   jpa:
