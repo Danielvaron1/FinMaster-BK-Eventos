@@ -1,4 +1,7 @@
-#
+#docker build -t daniel1varon/parchando-eventos:1.1 .
+#docker run -p 8088:8088 daniel1varon/parchando-eventos
+
+
 # Build del proyecto (Multi-Stage)
 # --------------------------------
 #
